@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   red: '#E66767',
@@ -12,7 +12,8 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: Roboto, sans-serif;
+    font-family: Roboto, sans-serif;
+    list-style: none;
   }
 
   body {
@@ -25,4 +26,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     margin: 0 auto;
   }
+
+  
 `
