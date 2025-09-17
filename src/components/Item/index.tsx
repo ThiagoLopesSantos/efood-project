@@ -31,10 +31,10 @@ const Item = () => (
         rápida, embalagens cuidadosas e qualidade garantida. <br />
         Experimente o Japão sem sair do lar com nosso delivery!
       </p>
+      <Button type="link" to="/item" title={'Clique aqui para saber mais'}>
+        <Tag size={'big'}>Saiba mais</Tag>
+      </Button>
     </DescriptionArea>
-    <Button type="link" to="/item" title={'Clique aqui para saber mais'}>
-      <Tag size={'big'}>Saiba mais</Tag>
-    </Button>
   </Itemcontainer>
 )
 

@@ -7,7 +7,8 @@ export const ButtonContainer = styled.button`
   cursor: pointer;
 `
 export const ButtonLink = styled(Link)`
-  border: none;
+  display: inline-flex;
   margin: 8px;
+  text-decoration: none;
   cursor: pointer;
 `

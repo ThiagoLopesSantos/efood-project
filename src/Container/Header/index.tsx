@@ -1,5 +1,5 @@
 import { HeroImage, Logo, Title } from './styles'
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/logo.svg'
 import BkImage from '../../assets/images/hero.png'
 
 const Header = () => (
