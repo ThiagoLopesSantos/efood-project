@@ -1,3 +1,4 @@
+// Definindo a tipagem dos itens
 export type ItemType = {
   id: number
   title: string

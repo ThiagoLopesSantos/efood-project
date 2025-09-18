@@ -1,25 +1,24 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Header from './Container/Header'
-import Main from './Container/Main'
 import { GlobalStyle } from './styles'
 import Footer from './Container/Footer'
+import Home from './pages/Home'
 
-const routes = createBrowserRouter([
-  {
-    path: '/',
-    element: <Main />
-  }
-])
+const Ways = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+  </Routes>
+)
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyle />
       <Header />
-      <RouterProvider router={routes} />
+      <Ways />
       <Footer />
-    </>
+    </BrowserRouter>
   )
 }
 
