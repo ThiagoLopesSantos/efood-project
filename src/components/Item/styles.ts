@@ -9,6 +9,9 @@ export const Itemcontainer = styled.li`
 export const ItemImg = styled.div`
   width: 100%;
   height: 217px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
   display: flex;
   justify-content: flex-end;
@@ -19,6 +22,7 @@ export const ItemImg = styled.div`
 
 export const DescriptionArea = styled.div`
   border: 1px solid;
+  border-top: none;
   width: 100%;
   background-color: ${colors.branco};
 

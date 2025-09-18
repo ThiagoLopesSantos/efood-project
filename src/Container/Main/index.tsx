@@ -1,15 +1,11 @@
 import { ListContainer } from './styles'
-import Item from '../../components/Item'
+import ItemList from '../../components/ItemList'
+import { mockItems } from '../../mocks/items'
 
 const Main = () => (
   <div className="container">
     <ListContainer>
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
-      <Item />
+      <ItemList items={mockItems} />
     </ListContainer>
   </div>
 )
