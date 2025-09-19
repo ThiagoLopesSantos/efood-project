@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Tag from '../../components/Tag'
 import { colors } from '../../styles'
+import Button from '../../components/Button'
 
 export const HeroImage = styled.header`
   width: 100%;
@@ -35,6 +36,12 @@ export const TopHeader = styled.div`
   }
   a {
     text-decoration: none;
+    color: ${colors.red};
+    font-size: 18px;
+    font-weight: bold;
+  }
+  button {
+    background-color: transparent;
     color: ${colors.red};
     font-size: 18px;
     font-weight: bold;

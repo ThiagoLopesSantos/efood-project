@@ -3,6 +3,7 @@ import logo from '../../assets/images/logo.svg'
 import BkImage from '../../assets/images/hero.png'
 import BgImage from '../../assets/images/laDolceVita.png'
 import { Link } from 'react-router-dom'
+import Button from '../../components/Button'
 
 interface HeaderProps {
   isHome: boolean
@@ -27,9 +28,9 @@ const Header = ({ isHome }: HeaderProps) => (
             <Logo src={logo} alt="Efood" />
             {/* Container para o link do carrinho */}
             <div>
-              <Link to="/carrinho">
+              <Button type="button" title="ver carrinho" to="/carrinho">
                 <span>0</span> produto(s) no carrinho
-              </Link>
+              </Button>
             </div>
           </TopHeader>
         </div>
