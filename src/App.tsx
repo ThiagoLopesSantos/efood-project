@@ -17,7 +17,6 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Header />
       <Ways />
       <Footer />
     </BrowserRouter>
