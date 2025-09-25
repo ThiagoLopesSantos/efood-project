@@ -49,30 +49,31 @@ export const TopHeader = styled.div`
 `
 export const Banner = styled.div`
   width: 100%;
-  height: 280px;
   background-size: cover;
   background-position: right;
   color: ${colors.branco};
   position: relative;
+  padding: 32px;
 
   span {
     font-size: 32px;
     font-weight: lighter;
-    margin-top: 25px;
     z-index: 1;
   }
-  h2 {
-    z-index: 1;
+
+  .title {
+    font-weight: bold;
   }
+
   .container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 157px;
+    gap: 156px;
   }
 
-  // Adicione um gradiente escuro sobre a imagem para o texto se destacar
+  // Filtro de escurecimento
   &::before {
     content: '';
     position: absolute;

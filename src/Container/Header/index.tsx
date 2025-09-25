@@ -37,7 +37,7 @@ const Header = ({ isHome }: HeaderProps) => (
         <Banner style={{ backgroundImage: `url(${BgImage})` }}>
           <div className="container">
             <span>Italiana</span>
-            <h2>La Dolce Vita Trattoria</h2>
+            <span className="title">La Dolce Vita Trattoria</span>
           </div>
         </Banner>
       </>
