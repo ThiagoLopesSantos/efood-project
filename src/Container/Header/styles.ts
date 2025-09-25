@@ -5,7 +5,7 @@ import Button from '../../components/Button'
 
 export const HeroImage = styled.header`
   width: 100%;
-  height: 384px;
+  position: relative;
 
   .container {
     margin: 0 auto;
@@ -19,6 +19,7 @@ export const Logo = styled.img`
 `
 export const Title = styled.h1`
   padding-top: 138px;
+  padding-bottom: 40px;
   font-weight: bold;
   font-size: 36px;
 `
@@ -27,7 +28,7 @@ export const TopHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 63px;
+  padding-top: 36px;
   padding-bottom: 65px;
 
   ${Logo} {

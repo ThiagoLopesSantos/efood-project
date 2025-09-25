@@ -5,13 +5,14 @@ export const PdContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 56px;
   padding-bottom: 120px;
 `
+
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
   width: 320px;
-  margin-top: 130px;
   background-color: ${colors.red};
   padding: 8px;
   color: ${colors.bege2};
