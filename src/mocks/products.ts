@@ -19,6 +19,27 @@ export const mockProducts: ProductType[] = [
   {
     id: 3,
     image: pizzaImg,
+    title: 'Pizza Peperonni',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+  },
+  {
+    id: 4,
+    image: pizzaImg,
+    title: 'Pizza Marguerita',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+  },
+  {
+    id: 5,
+    image: pizzaImg,
+    title: 'Pizza Calabresa',
+    description:
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+  },
+  {
+    id: 6,
+    image: pizzaImg,
     title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'

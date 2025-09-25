@@ -8,6 +8,7 @@ export const FooterContainer = styled.footer`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 120px;
 
   ${Logo} {
     margin-top: 40px;

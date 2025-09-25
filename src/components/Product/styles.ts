@@ -6,7 +6,7 @@ export const PdContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 56px;
-  padding-bottom: 120px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 `
 
 export const Card = styled.div`
