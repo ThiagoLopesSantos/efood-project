@@ -1,16 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import { GlobalStyle } from './styles'
 import Footer from './Container/Footer'
-import Home from './pages/Home'
-import ItemDetail from './pages/ItemDetail'
-
-const Ways = () => (
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/item/:id" element={<ItemDetail />} />
-  </Routes>
-)
+import Ways from './routes'
 
 function App() {
   return (

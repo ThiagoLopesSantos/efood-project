@@ -14,33 +14,31 @@ export type Props = {
   data: ItemType
 }
 
-const Item = ({ data }: Props) => (
-  <Itemcontainer>
-    <ItemImg style={{ backgroundImage: `url(${data.image})` }}>
-      {data.tags.map((tag) => (
-        <Tag key={tag} size={'small'}>
-          {tag}
-        </Tag>
-      ))}
-    </ItemImg>
-    <DescriptionArea>
-      <DescriptionHeader>
-        <h4>{data.title}</h4>
-        <RateContainer>
-          <span>{data.rating}</span>
-          <img src={star} alt="Estrela" />
-        </RateContainer>
-      </DescriptionHeader>
-      <p>{data.description}</p>
-      <Button
-        type="link"
-        to={`/item/${data.id}`}
-        title={'Clique aqui para saber mais'}
-      >
-        <Tag size={'big'}>Saiba mais</Tag>
-      </Button>
-    </DescriptionArea>
-  </Itemcontainer>
-)
+const Item = ({ data }: Props) => {
+  return (
+    <Itemcontainer>
+      <ItemImg style={{ backgroundImage: `url(${data.capa})` }}>
+        <Tag size={'small'}>{data.tipo}</Tag>
+      </ItemImg>
+      <DescriptionArea>
+        <DescriptionHeader>
+          <h4>{data.titulo}</h4>
+          <RateContainer>
+            <span>{data.avaliacao}</span>
+            <img src={star} alt="Estrela" />
+          </RateContainer>
+        </DescriptionHeader>
+        <p>{data.descricao}</p>
+        <Button
+          type="link"
+          to={`/item/${data.id}`}
+          title={'Clique aqui para saber mais'}
+        >
+          <Tag size={'big'}>Saiba mais</Tag>
+        </Button>
+      </DescriptionArea>
+    </Itemcontainer>
+  )
+}
 
 export default Item

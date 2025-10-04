@@ -27,6 +27,7 @@ export const DescriptionArea = styled.div`
   background-color: ${colors.branco};
 
   p {
+    overflow-y: scroll;
     font-size: 14px;
     padding: 16px 8px;
     line-height: 22px;

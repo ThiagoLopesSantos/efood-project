@@ -1,15 +1,17 @@
+import { Link } from 'react-router-dom'
+
 import { Banner, HeroImage, Logo, Title, TopHeader } from './styles'
 import logo from '../../assets/images/logo.svg'
 import BkImage from '../../assets/images/hero.png'
-import BgImage from '../../assets/images/laDolceVita.png'
-import { Link } from 'react-router-dom'
 import Button from '../../components/Button'
+import { ItemType } from '../../models/Item'
 
 interface HeaderProps {
   isHome: boolean
+  restaurantData?: ItemType
 }
 
-const Header = ({ isHome }: HeaderProps) => (
+const Header = ({ isHome, restaurantData }: HeaderProps) => (
   <HeroImage style={{ backgroundImage: `url(${BkImage})` }}>
     {isHome ? (
       <div className="container">
@@ -34,10 +36,10 @@ const Header = ({ isHome }: HeaderProps) => (
             </div>
           </TopHeader>
         </div>
-        <Banner style={{ backgroundImage: `url(${BgImage})` }}>
+        <Banner style={{ backgroundImage: `url(${restaurantData?.capa})` }}>
           <div className="container">
-            <span>Italiana</span>
-            <span className="title">La Dolce Vita Trattoria</span>
+            <span>{restaurantData?.tipo}</span>
+            <span className="title">{restaurantData?.titulo}</span>
           </div>
         </Banner>
       </>
