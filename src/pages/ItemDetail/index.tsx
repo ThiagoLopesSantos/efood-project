@@ -16,7 +16,7 @@ const ItemDetail = () => {
   useEffect(() => {
     if (id) {
       // Endpoint para buscar o restaurante específico
-      fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
+      fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
         .then((res) => res.json())
         .then((data: ItemType) => {
           setRestaurant(data)

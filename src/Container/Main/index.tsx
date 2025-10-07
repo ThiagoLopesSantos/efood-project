@@ -13,7 +13,7 @@ const Main = () => {
   // Hook para carregar os itens quando o componente for montado
   useEffect(() => {
     // Buscando os dados da API
-    fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes')
+    fetch('https://api-ebac.vercel.app/api/efood/restaurantes')
       .then((res) => res.json()) // Convertendo a resposta para JSON
       .then((data: ItemType[]) => {
         // Armazenando os dados no estado
