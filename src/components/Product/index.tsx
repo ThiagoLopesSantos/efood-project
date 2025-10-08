@@ -17,7 +17,7 @@ export type Props = {
 }
 
 // Formatando o preço para real
-const priceFormat = (price = 0) => {
+export const priceFormat = (price = 0) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL'
