@@ -1,7 +1,5 @@
 import styled from 'styled-components'
-import Tag from '../../components/Tag'
 import { colors } from '../../styles'
-import Button from '../../components/Button'
 
 export const HeroImage = styled.header`
   width: 100%;

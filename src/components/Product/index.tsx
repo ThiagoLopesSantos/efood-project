@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { ButtonCard, Card, DescriptionCard, PdContainer, Title } from './styles'
 import { ProductType } from '../../models/product'
 import {
@@ -10,7 +12,7 @@ import {
   Overlay
 } from './styles'
 import close from '../../assets/icons/close.svg'
-import { useState } from 'react'
+import { add, open } from '../../store/reducers/cart'
 
 export type Props = {
   data: ProductType
@@ -25,6 +27,13 @@ export const priceFormat = (price = 0) => {
 }
 
 const Product = ({ data }: Props) => {
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(data))
+    dispatch(open())
+  }
+
   // limitando a quantidade de caracteres na descrição
   const getDescription = (description: string) => {
     if (description.length > 121) {
@@ -57,9 +66,9 @@ const Product = ({ data }: Props) => {
             <h4>{data.nome}</h4>
             <ModalDescription>
               <p>{data.descricao}</p>
-              <span>Serve:{data.porcao}</span>
+              <span>Serve: {data.porcao}</span>
             </ModalDescription>
-            <button>
+            <button onClick={addToCart}>
               Adicionar ao carrinho - <span>{priceFormat(data.preco)}</span>
             </button>
           </ModalDetails>
