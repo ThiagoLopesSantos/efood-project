@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeroImage = styled.header`
   width: 100%;
@@ -20,6 +20,11 @@ export const Title = styled.h1`
   padding-bottom: 40px;
   font-weight: bold;
   font-size: 36px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 24px;
+    padding-top: 50px;
+  }
 `
 
 export const TopHeader = styled.div`
@@ -29,10 +34,23 @@ export const TopHeader = styled.div`
   padding-top: 36px;
   padding-bottom: 65px;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 40px;
+  }
+
   ${Logo} {
     margin-top: 0;
     margin-left: 80px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      margin: 0 auto; /* Centraliza a logo */
+      width: 150px;
+      height: 48px;
+    }
   }
+
   a {
     text-decoration: none;
     color: ${colors.red};

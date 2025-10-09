@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const PdContainer = styled.div`
   width: 100%;
@@ -7,6 +7,15 @@ export const PdContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 32px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const Card = styled.div`
@@ -74,18 +83,32 @@ export const ModalContent = styled.div`
   background-color: ${colors.red};
   position: relative;
   z-index: 1;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    flex-direction: column;
+  }
 `
 export const ModalImage = styled.img`
   max-width: 280px;
   width: 100%;
   height: 280px;
   object-fit: cover;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 `
 
 export const ModalDetails = styled.div`
   color: ${colors.branco};
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-top: 16px;
+  }
 
   h4 {
     font-size: 18px;
@@ -100,6 +123,10 @@ export const ModalDetails = styled.div`
     background-color: ${colors.bege2};
     cursor: pointer;
     width: fit-content;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 100%;
+    }
   }
 `
 export const ModalDescription = styled.div`
