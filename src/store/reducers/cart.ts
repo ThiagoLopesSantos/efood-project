@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ProductType } from '../../models/product'
 
-//    Criamos um novo tipo chamado CartItem
+//    Criei um novo tipo chamado CartItem
 //    Ele é baseado no ProductType (vem da API),
 //    mas adiciona um campo "quantity" pra controlar quantas unidades
 //    de cada produto o usuário colocou no carrinho.
@@ -21,7 +21,7 @@ const initialState: CartState = {
   isOpen: false
 }
 
-//  Criamos o slice do carrinho, com reducers pra manipular o estado
+//  Slice do carrinho, com reducers pra manipular o estado
 const cartSlice = createSlice({
   name: 'cart',
   initialState,

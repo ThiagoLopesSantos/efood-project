@@ -12,7 +12,6 @@ export const Overlay = styled.div`
   opacity: 0.7;
   cursor: pointer;
 `
-
 export const CartContainer = styled.div`
   position: fixed;
   top: 0;
@@ -81,7 +80,6 @@ export const RemoveButton = styled.button`
   background-color: transparent;
   cursor: pointer;
 `
-
 export const BtnCart = styled.button`
   background-color: ${colors.bege2};
   color: ${colors.red};
@@ -90,7 +88,70 @@ export const BtnCart = styled.button`
   max-width: 100%;
   width: 100%;
   padding: 4px 0;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   border: none;
   cursor: pointer;
+`
+// FORMULÁRIO DE ENDEREÇO DO CARRINHO
+export const FormContainer = styled.form`
+  color: ${colors.bege2};
+
+  h3 {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    background-color: ${colors.bege2};
+    width: 100%;
+    height: 32px;
+    border: none;
+    margin-bottom: 8px;
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      max-width: 150px;
+    }
+    .ipt-cardNumber {
+      max-width: 100%;
+      width: 228px;
+    }
+  }
+
+  ${BtnCart} {
+    margin-top: 16px;
+  }
+`
+export const CardCodeContainer = styled.div`
+  max-width: 80px;
+  width: 100%;
+`
+export const SuccessContainer = styled.div`
+  color: ${colors.bege2};
+
+  h3 {
+    margin-bottom: 16px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 22px;
+  }
 `

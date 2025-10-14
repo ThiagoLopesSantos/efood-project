@@ -13,17 +13,10 @@ import {
 } from './styles'
 import close from '../../assets/icons/close.svg'
 import { add, open } from '../../store/reducers/cart'
+import { convertToBrl } from '../../utils/priceConvert'
 
 export type Props = {
   data: ProductType
-}
-
-// Formatando o preço para real
-export const priceFormat = (price = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
 }
 
 const Product = ({ data }: Props) => {
@@ -69,7 +62,7 @@ const Product = ({ data }: Props) => {
               <span>Serve: {data.porcao}</span>
             </ModalDescription>
             <button onClick={addToCart}>
-              Adicionar ao carrinho - <span>{priceFormat(data.preco)}</span>
+              Adicionar ao carrinho - <span>{convertToBrl(data.preco)}</span>
             </button>
           </ModalDetails>
           <CloseIcon

@@ -1,20 +1,22 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  BtnCart,
-  CartContainer,
-  CartItem,
-  Overlay,
-  PriceContainer,
-  RemoveButton,
-  Sidebar
-} from './styles'
+
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
-import { priceFormat } from '../Product'
+import { convertToBrl } from '../../utils/priceConvert'
+import { getTotalPrice } from '../../utils/totalPrice'
+
+import CartItems from './cartSteps/CartItems'
+import DeliveryForm from './cartSteps/DeliveryForm'
+import PaymentForm from './cartSteps/PaymentForm'
+import SuccessMessage from './cartSteps/SuccessMessage'
+
+import * as S from './styles'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
+  const [currentStep, setCurrentStep] = useState(1)
 
   const closeCart = () => {
     dispatch(close())
@@ -24,37 +26,52 @@ const Cart = () => {
     dispatch(remove(id))
   }
 
-  const getTotalPrice = () => {
-    return items.reduce((acc, item) => {
-      return acc + item.preco * item.quantity
-    }, 0)
-  }
-
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
-        <ul>
-          {items.map((item) => (
-            <CartItem key={item.id}>
-              <img src={item.foto} alt={item.nome} />
-              <div>
-                <h4>{item.nome}</h4>
-                <span>
-                  {item.quantity}x{priceFormat(item.preco)}
-                </span>
-              </div>
-              <RemoveButton onClick={() => removeProduct(item.id)} />
-            </CartItem>
-          ))}
-        </ul>
-        <PriceContainer>
-          <p>Valor total</p>
-          <p>{priceFormat(getTotalPrice())}</p>
-        </PriceContainer>
-        <BtnCart>Continuar com a entrega</BtnCart>
-      </Sidebar>
-    </CartContainer>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
+        {currentStep === 1 && (
+          <>
+            <CartItems items={items} onRemove={removeProduct} />
+            <S.PriceContainer>
+              <p>Valor total</p>
+              <p>{convertToBrl(getTotalPrice(items))}</p>
+            </S.PriceContainer>
+            <S.BtnCart onClick={() => setCurrentStep(2)}>
+              Continuar com a entrega
+            </S.BtnCart>
+          </>
+        )}
+
+        {currentStep === 2 && (
+          <>
+            <DeliveryForm onNext={() => setCurrentStep(3)} />
+            <S.BtnCart onClick={() => setCurrentStep(1)}>
+              Voltar para o carrinho
+            </S.BtnCart>
+          </>
+        )}
+
+        {currentStep === 3 && (
+          <>
+            <PaymentForm
+              onConfirm={() => setCurrentStep(4)}
+              total={getTotalPrice(items)}
+            />
+            <S.BtnCart onClick={() => setCurrentStep(2)}>
+              Voltar para a edição de endereço
+            </S.BtnCart>
+          </>
+        )}
+
+        {currentStep === 4 && (
+          <>
+            <SuccessMessage />
+            <S.BtnCart onClick={closeCart}>Concluir</S.BtnCart>
+          </>
+        )}
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 
