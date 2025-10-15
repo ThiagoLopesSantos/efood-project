@@ -37,14 +37,14 @@ export const Sidebar = styled.aside`
 export const PriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  color: ${colors.bege2};
+  color: ${colors.beige2};
   font-size: 14px;
   font-weight: bold;
   margin-top: 40px;
   margin-bottom: 16px;
 `
 export const CartItem = styled.li`
-  background-color: ${colors.bege2};
+  background-color: ${colors.beige2};
   display: flex;
   padding: 8px;
   position: relative;
@@ -81,7 +81,7 @@ export const RemoveButton = styled.button`
   cursor: pointer;
 `
 export const BtnCart = styled.button`
-  background-color: ${colors.bege2};
+  background-color: ${colors.beige2};
   color: ${colors.red};
   font-weight: bold;
   font-size: 14px;
@@ -94,7 +94,7 @@ export const BtnCart = styled.button`
 `
 // FORMULÁRIO DE ENDEREÇO DO CARRINHO
 export const FormContainer = styled.form`
-  color: ${colors.bege2};
+  color: ${colors.beige2};
 
   h3 {
     margin-bottom: 16px;
@@ -109,7 +109,7 @@ export const FormContainer = styled.form`
   }
 
   input {
-    background-color: ${colors.bege2};
+    background-color: ${colors.beige2};
     width: 100%;
     height: 32px;
     border: none;
@@ -132,6 +132,12 @@ export const FormContainer = styled.form`
     }
   }
 
+  small {
+    color: yellow;
+    font-size: 10px;
+    display: block;
+  }
+
   ${BtnCart} {
     margin-top: 16px;
   }
@@ -141,7 +147,7 @@ export const CardCodeContainer = styled.div`
   width: 100%;
 `
 export const SuccessContainer = styled.div`
-  color: ${colors.bege2};
+  color: ${colors.beige2};
 
   h3 {
     margin-bottom: 16px;

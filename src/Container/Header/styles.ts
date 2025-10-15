@@ -68,7 +68,7 @@ export const Banner = styled.div`
   width: 100%;
   background-size: cover;
   background-position: right;
-  color: ${colors.branco};
+  color: ${colors.white};
   position: relative;
   padding: 32px;
 

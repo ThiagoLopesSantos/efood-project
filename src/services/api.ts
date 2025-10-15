@@ -1,6 +1,36 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ItemType } from '../models/Item'
 
+export type Product = {
+  id: number
+  price: number
+}
+
+export type PurchasePayload = {
+  products: Product[]
+  delivery: {
+    receiver: string
+    address: {
+      decription: string
+      city: string
+      zipCode: string
+      number: number
+      complement: string
+    }
+  }
+  payment: {
+    card: {
+      name: string
+      number: string
+      code: number
+      expires: {
+        month: number
+        year: number
+      }
+    }
+  }
+}
+
 const api = createApi({
   // Define a base da URL para todas as requisições
   // Assim, cada endpoint só precisa colocar o caminho final
@@ -24,9 +54,20 @@ const api = createApi({
       // Monta a URL completa com o ID
       // Exemplo: https://api-ebac.vercel.app/api/efood/restaurantes/1
       query: (id) => `restaurantes/${id}`
+    }),
+    purchase: builder.mutation<any, PurchasePayload>({
+      query: (payload) => ({
+        url: 'checkout',
+        method: 'POST',
+        body: payload
+      })
     })
   })
 })
 
-export const { useGetRestaurantsListQuery, useGetProductListQuery } = api
+export const {
+  useGetRestaurantsListQuery,
+  useGetProductListQuery,
+  usePurchaseMutation
+} = api
 export default api

@@ -24,7 +24,7 @@ export const DescriptionArea = styled.div`
   border: 1px solid;
   border-top: none;
   width: 100%;
-  background-color: ${colors.branco};
+  background-color: ${colors.white};
 
   p {
     overflow-y: scroll;

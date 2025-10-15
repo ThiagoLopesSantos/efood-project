@@ -6,7 +6,7 @@ import { useGetProductListQuery } from '../../services/api'
 
 const ItemDetail = () => {
   const { id } = useParams()
-  const { data: restaurant, isLoading } = useGetProductListQuery(id!)
+  const { data: restaurant } = useGetProductListQuery(id!)
 
   if (!restaurant) {
     return (

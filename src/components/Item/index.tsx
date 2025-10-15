@@ -1,14 +1,9 @@
-import {
-  DescriptionArea,
-  DescriptionHeader,
-  Itemcontainer,
-  ItemImg,
-  RateContainer
-} from './styles'
 import star from '../../assets/images/star.png'
 import Tag from '../Tag'
 import Button from '../Button'
 import { ItemType } from '../../models/Item'
+
+import * as S from './styles'
 
 export type Props = {
   data: ItemType
@@ -16,18 +11,18 @@ export type Props = {
 
 const Item = ({ data }: Props) => {
   return (
-    <Itemcontainer>
-      <ItemImg style={{ backgroundImage: `url(${data.capa})` }}>
+    <S.Itemcontainer>
+      <S.ItemImg style={{ backgroundImage: `url(${data.capa})` }}>
         <Tag size={'small'}>{data.tipo}</Tag>
-      </ItemImg>
-      <DescriptionArea>
-        <DescriptionHeader>
+      </S.ItemImg>
+      <S.DescriptionArea>
+        <S.DescriptionHeader>
           <h4>{data.titulo}</h4>
-          <RateContainer>
+          <S.RateContainer>
             <span>{data.avaliacao}</span>
             <img src={star} alt="Estrela" />
-          </RateContainer>
-        </DescriptionHeader>
+          </S.RateContainer>
+        </S.DescriptionHeader>
         <p>{data.descricao}</p>
         <Button
           type="link"
@@ -36,8 +31,8 @@ const Item = ({ data }: Props) => {
         >
           <Tag size={'big'}>Saiba mais</Tag>
         </Button>
-      </DescriptionArea>
-    </Itemcontainer>
+      </S.DescriptionArea>
+    </S.Itemcontainer>
   )
 }
 

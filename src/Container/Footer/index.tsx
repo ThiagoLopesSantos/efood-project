@@ -3,12 +3,13 @@ import instagram from '../../assets/icons/instagram-icon.svg'
 import facebook from '../../assets/icons/facebook-icon.svg'
 import twiiter from '../../assets/icons/twiiter-icon.svg'
 import { Logo } from '../Header/styles'
-import { FooterContainer, Info, SocialLinks } from './styles'
+
+import * as S from './styles'
 
 const Footer = () => (
-  <FooterContainer>
+  <S.FooterContainer>
     <Logo src={logo} alt="Efood" />
-    <SocialLinks>
+    <S.SocialLinks>
       <li>
         <a href="#">
           <img src={instagram} alt="Instagram" />
@@ -24,13 +25,13 @@ const Footer = () => (
           <img src={twiiter} alt="Instagram" />
         </a>
       </li>
-    </SocialLinks>
-    <Info>
+    </S.SocialLinks>
+    <S.Info>
       A efood é uma plataforma para divulgação de estabelecimentos, a
       responsabilidade pela entrega, qualidade <br />
       dos produtos é toda do estabelecimento contratado.{' '}
-    </Info>
-  </FooterContainer>
+    </S.Info>
+  </S.FooterContainer>
 )
 
 export default Footer

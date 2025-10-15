@@ -1,19 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { ButtonCard, Card, DescriptionCard, PdContainer, Title } from './styles'
+
 import { ProductType } from '../../models/product'
-import {
-  CloseIcon,
-  ModalContainer,
-  ModalContent,
-  ModalDescription,
-  ModalDetails,
-  ModalImage,
-  Overlay
-} from './styles'
 import close from '../../assets/icons/close.svg'
 import { add, open } from '../../store/reducers/cart'
 import { convertToBrl } from '../../utils/priceConvert'
+
+import * as S from './styles'
 
 export type Props = {
   data: ProductType
@@ -39,39 +32,41 @@ const Product = ({ data }: Props) => {
 
   return (
     <>
-      <PdContainer>
-        <Card>
+      <S.PdContainer>
+        <S.Card>
           <img src={data.foto} alt="foto" />
-          <Title>{data.nome}</Title>
-          <DescriptionCard>{getDescription(data.descricao)}</DescriptionCard>
-          <ButtonCard onClick={() => setModalIsOpen(true)}>
+          <S.Title>{data.nome}</S.Title>
+          <S.DescriptionCard>
+            {getDescription(data.descricao)}
+          </S.DescriptionCard>
+          <S.ButtonCard onClick={() => setModalIsOpen(true)}>
             adicionar ao carrinho
-          </ButtonCard>
-        </Card>
-      </PdContainer>
+          </S.ButtonCard>
+        </S.Card>
+      </S.PdContainer>
 
       {/*  Modal */}
-      <ModalContainer className={modalIsOpen ? 'visible' : ''}>
-        <Overlay onClick={() => setModalIsOpen(false)}></Overlay>
-        <ModalContent className="container">
-          <ModalImage src={data.foto} alt="Imagem do prato" />
-          <ModalDetails>
+      <S.ModalContainer className={modalIsOpen ? 'visible' : ''}>
+        <S.Overlay onClick={() => setModalIsOpen(false)}></S.Overlay>
+        <S.ModalContent className="container">
+          <S.ModalImage src={data.foto} alt="Imagem do prato" />
+          <S.ModalDetails>
             <h4>{data.nome}</h4>
-            <ModalDescription>
+            <S.ModalDescription>
               <p>{data.descricao}</p>
               <span>Serve: {data.porcao}</span>
-            </ModalDescription>
+            </S.ModalDescription>
             <button onClick={addToCart}>
               Adicionar ao carrinho - <span>{convertToBrl(data.preco)}</span>
             </button>
-          </ModalDetails>
-          <CloseIcon
+          </S.ModalDetails>
+          <S.CloseIcon
             src={close}
             alt="close"
             onClick={() => setModalIsOpen(false)}
           />
-        </ModalContent>
-      </ModalContainer>
+        </S.ModalContent>
+      </S.ModalContainer>
     </>
   )
 }

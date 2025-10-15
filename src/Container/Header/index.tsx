@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Banner, HeroImage, Logo, Title, TopHeader } from './styles'
+import { ItemType } from '../../models/Item'
+import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
+
 import logo from '../../assets/images/logo.svg'
 import BkImage from '../../assets/images/hero.png'
 import Button from '../../components/Button'
-import { ItemType } from '../../models/Item'
-import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
+
+import * as S from './styles'
 
 interface HeaderProps {
   isHome: boolean
@@ -23,22 +25,22 @@ const Header = ({ isHome, restaurantData }: HeaderProps) => {
   }
 
   return (
-    <HeroImage style={{ backgroundImage: `url(${BkImage})` }}>
+    <S.HeroImage style={{ backgroundImage: `url(${BkImage})` }}>
       {isHome ? (
         <div className="container">
-          <Logo src={logo} alt="Efood" />
-          <Title>
+          <S.Logo src={logo} alt="Efood" />
+          <S.Title>
             Viva experiências gastronômicas <br />
             no conforto da sua casa
-          </Title>
+          </S.Title>
         </div>
       ) : (
         <>
           <div className="container">
             {/* Aqui um container para o header com logo e links */}
-            <TopHeader>
+            <S.TopHeader>
               <Link to="/">Restaurantes</Link>
-              <Logo src={logo} alt="Efood" />
+              <S.Logo src={logo} alt="Efood" />
               {/* Container para o link do carrinho */}
               <div>
                 <Button
@@ -50,17 +52,17 @@ const Header = ({ isHome, restaurantData }: HeaderProps) => {
                   <span>{items.length}</span> produto(s) no carrinho
                 </Button>
               </div>
-            </TopHeader>
+            </S.TopHeader>
           </div>
-          <Banner style={{ backgroundImage: `url(${restaurantData?.capa})` }}>
+          <S.Banner style={{ backgroundImage: `url(${restaurantData?.capa})` }}>
             <div className="container">
               <span>{restaurantData?.tipo}</span>
               <span className="title">{restaurantData?.titulo}</span>
             </div>
-          </Banner>
+          </S.Banner>
         </>
       )}
-    </HeroImage>
+    </S.HeroImage>
   )
 }
 

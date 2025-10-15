@@ -24,7 +24,7 @@ export const Card = styled.div`
   width: 320px;
   background-color: ${colors.red};
   padding: 8px;
-  color: ${colors.bege2};
+  color: ${colors.beige2};
 
   img {
     display: block;
@@ -42,7 +42,7 @@ export const DescriptionCard = styled.p`
 `
 export const ButtonCard = styled.button`
   border: none;
-  background-color: ${colors.bege2};
+  background-color: ${colors.beige2};
   color: ${colors.red};
   font-weight: bold;
   padding: 4px;
@@ -102,7 +102,7 @@ export const ModalImage = styled.img`
 `
 
 export const ModalDetails = styled.div`
-  color: ${colors.branco};
+  color: ${colors.white};
   display: flex;
   flex-direction: column;
 
@@ -120,7 +120,7 @@ export const ModalDetails = styled.div`
     font-weight: bold;
     padding: 4px 7px;
     color: ${colors.red};
-    background-color: ${colors.bege2};
+    background-color: ${colors.beige2};
     cursor: pointer;
     width: fit-content;
 

@@ -3,7 +3,7 @@ import ItemList from '../../components/ItemList'
 import { useGetRestaurantsListQuery } from '../../services/api'
 
 const Main = () => {
-  const { data, isLoading } = useGetRestaurantsListQuery()
+  const { data } = useGetRestaurantsListQuery()
 
   if (!data) {
     return (

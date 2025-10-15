@@ -2,9 +2,9 @@ import { createGlobalStyle } from 'styled-components'
 
 export const colors = {
   red: '#E66767',
-  bege: '#FFF8F2',
-  bege2: '#FFEBD9',
-  branco: '#FFFFFF'
+  beige: '#FFF8F2',
+  beige2: '#FFEBD9',
+  white: '#FFFFFF'
 }
 
 export const breakpoints = {
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${colors.bege};
+    background-color: ${colors.beige};
     color: ${colors.red};
   }
 

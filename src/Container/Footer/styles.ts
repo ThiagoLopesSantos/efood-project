@@ -3,7 +3,7 @@ import { colors } from '../../styles'
 import { Logo } from '../Header/styles'
 
 export const FooterContainer = styled.footer`
-  background-color: ${colors.bege2};
+  background-color: ${colors.beige2};
   display: flex;
   justify-content: center;
   flex-direction: column;
