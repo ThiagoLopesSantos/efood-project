@@ -164,6 +164,7 @@ export const SuccessContainer = styled.div`
 export const EmptyCartText = styled.p`
   color: ${colors.beige2};
   margin-bottom: 16px;
+  line-height: 22px;
   font-size: 16px;
   font-weight: bold;
 `

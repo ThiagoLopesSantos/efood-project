@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import { getErrorMessage } from '../../../utils/formErrorMessage'
 
@@ -101,13 +102,14 @@ const DeliveryForm = ({ onNext }: Props) => {
               {getErrorMessage('zipCode', form.touched, form.errors)}
             </small>
           )}
-          <input
+          <InputMask
             type="text"
             name="zipCode"
             id="zipCode"
             value={form.values.zipCode}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask="99999-999"
           />
         </div>
         <div>

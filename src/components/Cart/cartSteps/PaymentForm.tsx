@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import { getErrorMessage } from '../../../utils/formErrorMessage'
 import { convertToBrl } from '../../../utils/priceConvert'
@@ -30,21 +31,13 @@ const PaymentForm = ({ onConfirm, total }: Props) => {
     },
     validationSchema: Yup.object({
       cardOwner: Yup.string().required('O nome no cartão é obrigatório'),
-      cardNumber: Yup.string()
-        .required('O número do cartão é obrigatório')
-        .matches(/^\d{16}$/, 'O cartão deve ter 16 dígitos'),
+      cardNumber: Yup.string().required('O número do cartão é obrigatório'),
       cardCode: Yup.string()
         .min(3, 'Mínimo de 3 números')
-        .max(3, 'Máximo de 3 números')
         .required('CVV é obrigatório')
         .matches(/^\d{3,4}$/, 'CVV inválido'),
-      expireMonth: Yup.number()
-        .required('Mês obrigatório')
-        .min(1, 'Mês inválido')
-        .max(12, 'Mês inválido'),
-      expireYear: Yup.number()
-        .required('Ano obrigatório')
-        .min(new Date().getFullYear() % 100, 'Ano inválido')
+      expireMonth: Yup.string().required('Mês obrigatório'),
+      expireYear: Yup.string().required('Ano obrigatório')
     }),
     onSubmit: (values) => {
       console.log('Dados do envio:', values)
@@ -76,14 +69,15 @@ const PaymentForm = ({ onConfirm, total }: Props) => {
               {getErrorMessage('cardNumber', form.touched, form.errors)}
             </small>
           )}
-          <input
+          <InputMask
             className="ipt-cardNumber"
-            type="number"
+            type="text"
             name="cardNumber"
             id="cardNumber"
             value={form.values.cardNumber}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask="9999 9999 9999 9999"
           />
         </div>
         <S.CardCodeContainer>
@@ -93,13 +87,14 @@ const PaymentForm = ({ onConfirm, total }: Props) => {
               {getErrorMessage('cardCode', form.touched, form.errors)}
             </small>
           )}
-          <input
-            type="number"
+          <InputMask
+            type="text"
             name="cardCode"
             id="cardCode"
             value={form.values.cardCode}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask="999"
           />
         </S.CardCodeContainer>
       </div>
@@ -112,13 +107,14 @@ const PaymentForm = ({ onConfirm, total }: Props) => {
               {getErrorMessage('expireMonth', form.touched, form.errors)}
             </small>
           )}
-          <input
-            type="number"
+          <InputMask
+            type="text"
             name="expireMonth"
             id="expireMonth"
             value={form.values.expireMonth}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask="99"
           />
         </div>
         <div>
@@ -128,13 +124,14 @@ const PaymentForm = ({ onConfirm, total }: Props) => {
               {getErrorMessage('expireYear', form.touched, form.errors)}
             </small>
           )}
-          <input
-            type="number"
+          <InputMask
+            type="text"
             name="expireYear"
             id="expireYear"
             value={form.values.expireYear}
             onChange={form.handleChange}
             onBlur={form.handleBlur}
+            mask="9999"
           />
         </div>
       </div>
