@@ -1,287 +1,173 @@
-# 🍔 Efood — Projeto React com Checkout Completo
+# Efood - Plataforma de Pedidos Online
 
-> Desenvolvido por **Thiago Lopes**
+## Visão Geral
 
-Aplicação de delivery semelhante ao iFood, desenvolvida com **React + TypeScript**, integrando formulários de entrega e pagamento, carrinho global com **Redux Toolkit**, validações com **Formik + Yup**, e integração com API real via **RTK Query**.
+O **Efood** é uma aplicação web de pedidos online desenvolvida em **React** com **TypeScript** e **Redux Toolkit**, que permite aos usuários explorar restaurantes, visualizar cardápios, adicionar produtos ao carrinho, preencher informações de entrega e pagamento, e finalizar pedidos com confirmação da API.  
 
----
-
-## 📋 Sumário
-1. [Visão Geral](#-visão-geral)
-2. [Tecnologias Usadas](#-tecnologias-usadas)
-3. [Estrutura de Pastas](#-estrutura-de-pastas)
-4. [Fluxo do Usuário](#-fluxo-do-usuário)
-5. [Integração com a API `/checkout`](#-integração-com-a-api-checkout)
-6. [Como Rodar Localmente](#-como-rodar-localmente)
-7. [Principais Arquivos e Responsabilidades](#-principais-arquivos-e-responsabilidades)
-8. [Gerenciamento de Estado Global](#-gerenciamento-de-estado-global)
-9. [Formulários e Validação](#-formulários-e-validação)
-10. [Persistência do Carrinho](#-persistência-do-carrinho)
-11. [Comportamentos Importantes](#-comportamentos-importantes)
-12. [Testando o Endpoint `/checkout`](#-testando-o-endpoint-checkout)
-13. [O que Eu Aprendi](#-o-que-eu-aprendi)
-14. [Próximos Passos / Melhorias](#-próximos-passos--melhorias)
+O projeto foi pensado para simular um sistema real de e-commerce de alimentos, com foco em boas práticas de estado global, formulários complexos e integração com API.
 
 ---
 
-## 🚀 Visão Geral
+## Tecnologias Utilizadas
 
-O **Efood** é um mini e-commerce de delivery onde o usuário pode:
-- Visualizar restaurantes (home);
-- Acessar o cardápio de um restaurante;
-- Adicionar itens ao carrinho global;
-- Realizar o checkout completo em etapas (itens → entrega → pagamento → sucesso);
-- Integrar com API real para finalizar o pedido;
-- Visualizar os dados retornados da API após o pedido.
-
-O foco principal foi aplicar **Redux Toolkit**, **RTK Query**, **Formik**, **Yup**, e boas práticas de componentização.
-
----
-
-## 🧠 Tecnologias Usadas
-
-| Categoria | Tecnologias |
-|------------|--------------|
-| Framework | React + TypeScript |
-| Estado Global | Redux Toolkit |
-| API | RTK Query |
-| Formulários | Formik + Yup |
-| Estilos | Styled Components |
-| Persistência | redux-persist |
-| Deploy | Vercel |
-| Utilitários | framer-motion, utils de formatação e totalização |
+- **React** (com hooks e roteamento via React Router)
+- **TypeScript**
+- **Redux Toolkit** (com **Redux Persist** para manter o carrinho mesmo ao atualizar a página)
+- **Redux Toolkit Query (RTK Query)** para integração com API
+- **Formik + Yup** para validação de formulários
+- **React Input Mask** para máscaras em campos de formulário (CEP, cartão, CVV)
+- **Styled Components** para estilização
+- **React Spinners** para loaders
 
 ---
 
-## 📁 Estrutura de Pastas (resumida)
+## Estrutura do Projeto
 
 ```
 src/
-  components/
-    Cart/
-      index.tsx
-      cartSteps/
-        CartItems.tsx
-        DeliveryForm.tsx
-        PaymentForm.tsx
-        SuccessMessage.tsx
-  pages/
-    Home.tsx
-    ItemDetail.tsx
-  services/
-    api.ts
-  store/
-    reducers/
-      cart.ts
-    index.ts
-  utils/
-    totalPrice.ts
-    priceConvert.ts
+├─ components/
+│  ├─ Button/
+│  ├─ Cart/
+│  │  ├─ cartSteps/
+│  │  │  ├─ CartItems.tsx
+│  │  │  ├─ DeliveryForm.tsx
+│  │  │  ├─ PaymentForm.tsx
+│  │  │  └─ SuccessMessage.tsx
+│  │  └─ Cart.tsx
+│  ├─ Item/
+│  ├─ ItemList.tsx
+│  ├─ Product/
+│  ├─ ProductList.tsx
+│  └─ Tag/
+├─ models/
+│  ├─ Item.ts
+│  └─ product.ts
+├─ services/
+│  └─ api.ts
+├─ store/
+│  ├─ reducers/
+│  │  └─ cart.ts
+│  └─ index.ts
+├─ Container/
+│  ├─ Footer.tsx
+│  ├─ Header.tsx
+│  └─ Main.tsx
+├─ utils/
+│  ├─ formErrorMessage.ts
+│  ├─ priceConvert.ts
+│  └─ totalPrice.ts
+├─ pages/
+│  ├─ Home.tsx
+│  └─ ItemDetail.tsx
+├─ routes.tsx
+└─ App.tsx
 ```
 
 ---
 
-## 🧭 Fluxo do Usuário
+## Funcionalidades Implementadas
 
-1. **Home**: lista de restaurantes (dados da API).  
-2. **Restaurante**: mostra o cardápio e adiciona itens ao carrinho.  
-3. **Carrinho (Modal)**:  
-   - Step 1 → Itens + total  
-   - Step 2 → Formulário de entrega  
-   - Step 3 → Formulário de pagamento  
-   - Step 4 → Confirmação do pedido (dados da API)  
-4. **Concluir** → Limpa o carrinho e fecha o modal.  
+### 1. Listagem de Restaurantes e Produtos
+- A página **Home** lista restaurantes usando o endpoint `getRestaurantsList`.
+- Cada restaurante possui um card com informações básicas e link para detalhamento.
+- A página **ItemDetail** mostra o cardápio completo do restaurante selecionado com os produtos.
 
----
+### 2. Carrinho de Compras
+- Adicionar/remover produtos do carrinho.
+- Controla quantidade de produtos por item.
+- Carrinho lateral com overlay e botão para abrir/fechar.
+- Total do pedido calculado automaticamente (`getTotalPrice`).
+- Persistência do estado do carrinho com **Redux Persist**, mantendo os itens mesmo após atualizar a página.
 
-## 🌐 Integração com a API `/checkout`
+### 3. Formulário de Entrega
+- Criado com **Formik + Yup**.
+- Campos validados: nome, endereço, cidade, CEP (com máscara), número e complemento.
+- Mantém os valores preenchidos mesmo ao voltar para o carrinho.
 
-### Endpoint configurado em `src/services/api.ts`:
+### 4. Formulário de Pagamento
+- Campos validados: nome no cartão, número, CVV e validade (mês/ano).
+- Máscaras aplicadas para melhorar UX.
 
-```ts
-purchase: builder.mutation<any, PurchasePayload>({
-  query: (payload) => ({
-    url: 'checkout',
-    method: 'POST',
-    body: payload
-  })
-})
-```
+### 5. Confirmação de Pedido
+- Ao clicar em "Finalizar pedido", os dados de entrega e pagamento são enviados via **RTK Query mutation** para `POST /checkout`.
+- Exibe tela de **SuccessMessage** com o `orderId` retornado pela API.
 
-### Estrutura do `PurchasePayload`
-
-```ts
-{
-  products: [{ id: number, price: number }],
-  delivery: {
-    receiver: string,
-    address: {
-      decription: string,
-      city: string,
-      zipCode: string,
-      number: number,
-      complement: string
-    }
-  },
-  payment: {
-    card: {
-      name: string,
-      number: string,
-      code: number,
-      expires: {
-        month: number,
-        year: number
-      }
-    }
-  }
-}
-```
-
-### Exemplo de chamada no `Cart`:
-```ts
-const response = await purchase(payload).unwrap()
-setOrderData(response)
-setCurrentStep(4)
-dispatch(clearCart())
-```
+### 6. Integração com API
+- Endpoints criados com **Redux Toolkit Query**:
+  - `getRestaurantsList` → lista restaurantes.
+  - `getProductList` → detalhe de restaurante específico.
+  - `purchase` → finaliza pedido e retorna ID do pedido.
 
 ---
 
-## 🧑‍💻 Como Rodar Localmente
+## Aprendizados e Insights
+
+1. **Gerenciamento de Estado Global**
+   - Uso de Redux Toolkit para controlar o carrinho, mantendo a lógica centralizada e reutilizável.
+   - Persistência do estado com Redux Persist para melhor experiência do usuário.
+
+2. **Formulários Complexos**
+   - Aplicação prática de Formik e Yup para validação, incluindo campos opcionais e máscaras de entrada.
+   - Tratamento de erros e feedback ao usuário com mensagens específicas.
+
+3. **Integração com API**
+   - RTK Query simplifica chamadas de API, cache e gerenciamento de estado de dados.
+   - Estrutura de payloads e tipagem TypeScript garante segurança e consistência.
+
+4. **UX e Interatividade**
+   - Modais para visualização de produtos.
+   - Mensagens de confirmação detalhadas.
+   - Carrinho lateral com overlay para foco no conteúdo principal.
+
+5. **Boas práticas**
+   - Componentização clara.
+   - Tipagem rigorosa com TypeScript.
+   - Separação de responsabilidades entre componentes, utils e store.
+
+---
+
+## Como Rodar o Projeto
+
+1. Clone o repositório:
 
 ```bash
-# 1. Clonar o projeto
-git clone <url-do-repo>
+git clone <seu-repositorio>
 cd efood
-
-# 2. Instalar dependências
-npm install
-# ou
-yarn
-
-# 3. Rodar o projeto
-npm run dev
-
-# 4. Build de produção
-npm run build
-
-# 5. Deploy (Vercel)
-# Ao dar push na main, a Vercel faz o deploy automático
 ```
 
----
-
-## 🧩 Principais Arquivos e Responsabilidades
-
-| Arquivo | Responsabilidade |
-|----------|------------------|
-| `Cart/index.tsx` | Controla o modal e as etapas do checkout |
-| `DeliveryForm.tsx` | Formulário de entrega (Formik + Yup) |
-| `PaymentForm.tsx` | Formulário de pagamento (Formik + Yup) |
-| `SuccessMessage.tsx` | Exibe os dados do pedido após a API |
-| `cart.ts` | Slice global do carrinho (add, remove, clear, open, close) |
-| `api.ts` | RTK Query (endpoints + mutation `purchase`) |
-| `totalPrice.ts` | Soma dos preços dos produtos |
-| `priceConvert.ts` | Formata valores em reais (BRL) |
-
----
-
-## 🗃️ Gerenciamento de Estado Global
-
-- Utilizado **Redux Toolkit** para simplificar reducers e actions.  
-- Carrinho global em `cart.ts` com persistência via `redux-persist`.  
-- **RTK Query** para consumir API e realizar o `POST /checkout`.
-
----
-
-## 🧾 Formulários e Validação
-
-- **Formik** gerencia o estado dos campos, validação e submit.
-- **Yup** define o schema de cada etapa (entrega e pagamento).
-- Erros são exibidos apenas após o campo ser tocado (`touched`).
-
----
-
-## 💾 Persistência do Carrinho
-
-Configurada com **redux-persist** para manter o carrinho mesmo após recarregar a página.
-
-```ts
-const persistConfig = {
-  key: 'root',
-  storage,
-  whitelist: ['cart']
-}
-```
-
----
-
-## ⚙️ Comportamentos Importantes
-
-- **Voltar**: o usuário pode navegar entre etapas sem perder o que digitou.  
-- **Concluir**: ao finalizar, o carrinho é limpo e o modal é fechado.  
-- **Validação**: só avança de etapa quando o formulário é válido.  
-- **Resposta da API**: exibida no `SuccessMessage` com os dados do pedido.
-
----
-
-## 🧪 Testando o Endpoint `/checkout`
-
-Teste manual com **curl**:
+2. Instale as dependências:
 
 ```bash
-curl -X POST "https://api-ebac.vercel.app/api/efood/checkout" -H "Content-Type: application/json" -d '{
-  "products":[{"id":1,"price":29.9}],
-  "delivery":{
-    "receiver":"Thiago Lopes",
-    "address":{
-      "decription":"Rua Exemplo, 123",
-      "city":"São Paulo",
-      "zipCode":"01234-567",
-      "number":123,
-      "complement":"Apt 1"
-    }
-  },
-  "payment":{
-    "card":{
-      "name":"Thiago Lopes",
-      "number":"4242424242424242",
-      "code":123,
-      "expires":{"month":12,"year":25}
-    }
-  }
-}'
+npm install
 ```
 
----
+3. Inicie o servidor de desenvolvimento:
 
-## 📘 O que Eu Aprendi
+```bash
+npm start
+```
 
-Durante este projeto aprendi e pratiquei:
-
-- Criação e organização de **slices** no Redux Toolkit.  
-- Uso de **RTK Query** para requisições e mutations.  
-- Como integrar **Formik + Yup** em formulários complexos.  
-- Manter estado de formulários entre etapas de checkout.  
-- Persistir dados do carrinho com **redux-persist**.  
-- Estruturar um fluxo completo de checkout com modal em steps.  
-- Configurar e realizar **deploy automático na Vercel**.
+4. Acesse `http://localhost:3000`.
 
 ---
 
-## 🔮 Próximos Passos / Melhorias
+## Próximos Passos
 
-- Adicionar **tratamento de erro** e **loading** nos formulários.  
-- Implementar **testes unitários** e de integração.  
-- Melhorar **acessibilidade** no modal (focus trap, aria-labels).  
-- Adicionar **animações suaves** entre etapas (Framer Motion).  
-- Permitir **persistência também dos dados de entrega e pagamento**.
+- Implementar atualização do carrinho sem necessidade de reload da página.
+- Melhorar testes unitários e de integração.
+- Adicionar filtros e pesquisa de restaurantes/produtos.
 
 ---
 
-## ✅ Conclusão
+## Conclusão
 
-Este projeto consolida conceitos essenciais de **frontend moderno**:  
-gerenciamento de estado global, integração com API, validação de formulários, e UX fluída em múltiplas etapas.
+Este projeto reforçou habilidades de:
 
-> “O aprendizado não está só em terminar o código, mas em entender cada parte dele.” — *Thiago Lopes*
+- React avançado (hooks, roteamento, modais);
+- Redux Toolkit + Persist;
+- Formik + Yup para formulários complexos;
+- Integração com APIs REST;
+- TypeScript para segurança de tipos.
+
+A aplicação está pronta para uso e demonstra fluxo completo de e-commerce de alimentos, desde visualização do cardápio até pagamento e confirmação de pedido.
+
