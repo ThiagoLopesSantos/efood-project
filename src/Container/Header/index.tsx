@@ -49,7 +49,10 @@ const Header = ({ isHome, restaurantData }: HeaderProps) => {
                   title="ver carrinho"
                   to="/carrinho"
                 >
-                  <span>{items.length}</span> produto(s) no carrinho
+                  <span>
+                    {items.reduce((acc, item) => acc + item.quantity, 0)}
+                  </span>{' '}
+                  produto(s) no carrinho
                 </Button>
               </div>
             </S.TopHeader>

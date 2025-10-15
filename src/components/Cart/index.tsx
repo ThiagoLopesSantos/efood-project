@@ -31,6 +31,11 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
+    // Resetar steps e dados de pedido
+    setCurrentStep(1)
+    setDeliveryValues(null)
+    setPaymentValues(null)
+    setOrderData(null)
   }
 
   const removeProduct = (id: number) => {
