@@ -161,3 +161,9 @@ export const SuccessContainer = styled.div`
     line-height: 22px;
   }
 `
+export const EmptyCartText = styled.p`
+  color: ${colors.beige2};
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: bold;
+`

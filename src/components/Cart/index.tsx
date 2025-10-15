@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, clearCart } from '../../store/reducers/cart'
 import { convertToBrl } from '../../utils/priceConvert'
 import { getTotalPrice } from '../../utils/totalPrice'
 import { PurchasePayload, usePurchaseMutation } from '../../services/api'
@@ -83,52 +83,71 @@ const Cart = () => {
     <S.CartContainer className={isOpen ? 'is-open' : ''}>
       <S.Overlay onClick={closeCart} />
       <S.Sidebar>
-        {currentStep === 1 && (
+        {items.length > 0 ? (
           <>
-            <CartItems items={items} onRemove={removeProduct} />
-            <S.PriceContainer>
-              <p>Valor total</p>
-              <p>{convertToBrl(getTotalPrice(items))}</p>
-            </S.PriceContainer>
-            <S.BtnCart onClick={() => setCurrentStep(2)}>
-              Continuar com a entrega
-            </S.BtnCart>
-          </>
-        )}
+            {currentStep === 1 && (
+              <>
+                <CartItems items={items} onRemove={removeProduct} />
+                <S.PriceContainer>
+                  <p>Valor total</p>
+                  <p>{convertToBrl(getTotalPrice(items))}</p>
+                </S.PriceContainer>
+                <S.BtnCart onClick={() => setCurrentStep(2)}>
+                  Continuar com a entrega
+                </S.BtnCart>
+              </>
+            )}
 
-        {currentStep === 2 && (
-          <>
-            <DeliveryForm
-              onNext={(values) => {
-                setDeliveryValues(values) // guarda dados do delivery
-                setCurrentStep(3)
-              }}
-            />
-            <S.BtnCart onClick={() => setCurrentStep(1)}>
-              Voltar para o carrinho
-            </S.BtnCart>
-          </>
-        )}
+            {currentStep === 2 && (
+              <>
+                <DeliveryForm
+                  onNext={(values) => {
+                    setDeliveryValues(values) // guarda dados do delivery
+                    setCurrentStep(3)
+                  }}
+                />
+                <S.BtnCart onClick={() => setCurrentStep(1)}>
+                  Voltar para o carrinho
+                </S.BtnCart>
+              </>
+            )}
 
-        {currentStep === 3 && (
-          <>
-            <PaymentForm
-              onConfirm={(values) => {
-                setPaymentValues(values) // guarda os valores do payment (opcional)
-                handleConfirmOrder(values) // monta payload (usa deliveryValues do state) e chama API
-              }}
-              total={getTotalPrice(items)}
-            />
-            <S.BtnCart onClick={() => setCurrentStep(2)}>
-              Voltar para a edição de endereço
-            </S.BtnCart>
-          </>
-        )}
+            {currentStep === 3 && (
+              <>
+                <PaymentForm
+                  onConfirm={(values) => {
+                    setPaymentValues(values) // guarda os valores do payment (opcional)
+                    handleConfirmOrder(values) // monta payload (usa deliveryValues do state) e chama API
+                  }}
+                  total={getTotalPrice(items)}
+                />
+                <S.BtnCart onClick={() => setCurrentStep(2)}>
+                  Voltar para a edição de endereço
+                </S.BtnCart>
+              </>
+            )}
 
-        {currentStep === 4 && (
+            {currentStep === 4 && (
+              <>
+                <SuccessMessage orderData={orderData} />
+                <S.BtnCart
+                  onClick={() => {
+                    closeCart()
+                    dispatch(clearCart())
+                  }}
+                >
+                  Concluir
+                </S.BtnCart>
+              </>
+            )}
+          </>
+        ) : (
           <>
-            <SuccessMessage orderData={orderData} />
-            <S.BtnCart onClick={closeCart}>Concluir</S.BtnCart>
+            <S.EmptyCartText>
+              O carrinho esta vazio. Volte e adicione um prato para continuar.
+            </S.EmptyCartText>
+
+            <S.BtnCart onClick={closeCart}>Voltar para as compras</S.BtnCart>
           </>
         )}
       </S.Sidebar>

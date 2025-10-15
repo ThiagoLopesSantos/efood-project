@@ -1,6 +1,7 @@
 import { ListContainer } from './styles'
 import ItemList from '../../components/ItemList'
 import { useGetRestaurantsListQuery } from '../../services/api'
+import Loader from '../../Loader'
 
 const Main = () => {
   const { data } = useGetRestaurantsListQuery()
@@ -8,7 +9,7 @@ const Main = () => {
   if (!data) {
     return (
       <div className="container">
-        <h2>Carregando restaurantes...</h2>
+        <Loader />
       </div>
     )
   }

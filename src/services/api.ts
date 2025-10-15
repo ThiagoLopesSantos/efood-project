@@ -31,6 +31,10 @@ export type PurchasePayload = {
   }
 }
 
+type PurchaseResponse = {
+  orderId: string
+}
+
 const api = createApi({
   // Define a base da URL para todas as requisições
   // Assim, cada endpoint só precisa colocar o caminho final
@@ -55,7 +59,7 @@ const api = createApi({
       // Exemplo: https://api-ebac.vercel.app/api/efood/restaurantes/1
       query: (id) => `restaurantes/${id}`
     }),
-    purchase: builder.mutation<any, PurchasePayload>({
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
       query: (payload) => ({
         url: 'checkout',
         method: 'POST',

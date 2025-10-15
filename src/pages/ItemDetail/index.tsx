@@ -2,21 +2,23 @@ import { useParams } from 'react-router-dom'
 
 import Header from '../../Container/Header'
 import ProductList from '../../components/ProductList'
+import Loader from '../../Loader'
 import { useGetProductListQuery } from '../../services/api'
 
+type ItemsParams = {
+  id: string
+}
+
 const ItemDetail = () => {
-  const { id } = useParams()
-  const { data: restaurant } = useGetProductListQuery(id!)
+  const { id } = useParams() as ItemsParams
+  const { data: restaurant } = useGetProductListQuery(id)
 
   if (!restaurant) {
     return (
       <>
         <Header isHome={false} />
-        <div
-          className="container"
-          style={{ textAlign: 'center', padding: '64px' }}
-        >
-          <h2>Carregando detalhes do restaurante...</h2>
+        <div className="container">
+          <Loader />
         </div>
       </>
     )
